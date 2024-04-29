@@ -39,6 +39,17 @@ function App() {
     setTodos(updatedTodos)
   }
 
+  const editTodo = (newTodo) => {
+    let updatedTodos = todos.map((todo) => {
+      if (todo.id === newTodo.id) {
+        todo.text = document.getElementById(newTodo.id).value;
+      }
+      return todo;
+    })
+    setTodos(updatedTodos)
+    setEdit(null);
+  }
+
   return (
     <div id='todo-list'>
       <h1>Todo List</h1>
@@ -51,9 +62,19 @@ function App() {
         <div className='todo' key={todo.id}>
           <input type='checkbox' id="complete-checkbox" checked={todo.isCompleted} onChange={() => toggleComplete(todo.id)} />
           <div className='todo-text'>
-            <div>{todo.text}</div>
+            {todo.id === edit ?
+              (<input type='text' id={todo.id} defaultValue={todo.text} />
+              ) :
+              (<div>{todo.text}</div>)
+            }
           </div>
           <div className='todo-action'>
+            {todo.id === edit ?
+              (<button onClick={() => editTodo(todo)}>Submit Edit</button>
+              ) :
+              (<button onClick={() => setEdit(todo.id)}>Edit Todo</button>
+              )}
+
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
           </div>
         </div>
