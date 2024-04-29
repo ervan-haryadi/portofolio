@@ -5,6 +5,7 @@ function App() {
   const [ todos, setTodos ] = useState([]);
 
   const addTodo = (e) => {
+    console.log("add called")
     e.preventDefault()
 
     let todo_text = document.getElementById('addTodo').value;
@@ -20,6 +21,12 @@ function App() {
     }
   }
 
+  const deleteTodo = (id) => {
+    console.log("delete called")
+    let updatedTodos = todos.filter((todo) => todo.id !== id)
+    setTodos(updatedTodos)
+  }
+
   return (
     <div id='todo-list'>
       <h1>Todo List</h1>
@@ -32,6 +39,9 @@ function App() {
       <div className='todo' key={todo.id}>
         <div className='todo-text'>
           <div>{todo.text}</div>
+        </div>
+        <div className='todo-action'>
+        <button onClick={() => deleteTodo(todo.id)}>Delete</button>
         </div>
       </div>
     )}
