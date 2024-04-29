@@ -1,11 +1,12 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
-  const [ todos, setTodos ] = useState([]);
+  const [todos, setTodos] = useState([]);
+  const [edit, setEdit] = useState(null);
 
   const addTodo = (e) => {
-    console.log("add called")
+    console.log(todos)
     e.preventDefault()
 
     let todo_text = document.getElementById('addTodo').value;
@@ -14,6 +15,7 @@ function App() {
       let newTodo = {
         id: new Date().getTime(),
         text: todo_text,
+        isCompleted: false,
       }
       setTodos([...todos].concat(newTodo))
     } else {
@@ -27,24 +29,35 @@ function App() {
     setTodos(updatedTodos)
   }
 
+  const toggleComplete = (id) => {
+    let updatedTodos = [...todos].map((todo) => {
+      if (todo.id === id) {
+        todo.isCompleted = !todo.isCompleted
+      }
+      return todo
+    })
+    setTodos(updatedTodos)
+  }
+
   return (
     <div id='todo-list'>
       <h1>Todo List</h1>
-      <form onSubmit={ addTodo }>
+      <form onSubmit={addTodo}>
         <input type='text' id='addTodo' />
         <button type='submit'>Add Todo</button>
       </form>
 
-    {todos.map((todo) => 
-      <div className='todo' key={todo.id}>
-        <div className='todo-text'>
-          <div>{todo.text}</div>
+      {todos.map((todo) =>
+        <div className='todo' key={todo.id}>
+          <input type='checkbox' id="complete-checkbox" checked={todo.isCompleted} onChange={() => toggleComplete(todo.id)} />
+          <div className='todo-text'>
+            <div>{todo.text}</div>
+          </div>
+          <div className='todo-action'>
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+          </div>
         </div>
-        <div className='todo-action'>
-        <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-        </div>
-      </div>
-    )}
+      )}
     </div>
   );
 }
