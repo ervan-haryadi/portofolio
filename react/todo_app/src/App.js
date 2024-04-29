@@ -50,6 +50,10 @@ function App() {
     setEdit(null);
   }
 
+  const deleteAll = () => {
+    setTodos([])
+  }
+
   return (
     <div id='todo-list'>
       <h1>Todo List</h1>
@@ -79,6 +83,7 @@ function App() {
           </div>
         </div>
       )}
+      <button onClick={() => deleteAll()}>Delete All Todos</button>
     </div>
   );
 }
