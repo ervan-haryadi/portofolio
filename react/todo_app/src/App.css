@@ -1,38 +1,129 @@
-.App {
+h1 {
   text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-style: italic;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #A79277;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+#todo-list { /* whole section of todo */
+  width:60%;
+  margin: 1em auto;
+}
+
+form .todo {
+  padding: 1em 2em;
+  margin-bottom: 1em;
+}
+
+form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+form input {
+  padding: 0.5em 0.5em;
+  flex-grow: 1;
+  margin-right: 2em;
+}
+
+.todo {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(15, 26, 61);
+}
+
+button {
+  font-size: larger;
+  background-color: rgb(65, 124, 134);
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(106, 172, 184);
+}
+
+button:active {
+  background-color: rgb(134, 198, 209);
+  color:rgb(189, 212, 198);
+}
+
+input[type='text'] {
+  font-size:x-large;
+  font-family: monospace;
+}
+
+input[type='checkbox'] {
+  transform: scale(1.8);
+  cursor: pointer;
+}
+
+.todo-text {
+  font-size: x-large;
+  /* line-height: 24px; */
+  margin: 1em;
+  display: flex;
+  justify-content: space-between;
+  /* align-self:center; */
+}
+
+@media screen and (max-width:900px) {
+  .todo-text {
+    font-size:medium;
+  }
+
+  button, input[type='text'] {
+    font-size: small;
+  }
+
+  input[type='checkbox'] {
+    transform: scale(1.4);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@media screen and (max-width:500px) {
+  .todo-text {
+    font-size:small;
+  }
+
+  button, input[type='text'] {
+    font-size: smaller;
+  }
+
+  input[type='checkbox'] {
+    transform: scale(1.2  );
+  }
+}
+
+.todo-actions {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  margin-inline: 1em;
+  margin-bottom: 1em;
+}
+
+.todo-clear {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+#clear-all {
+  background-color: rgb(199, 38, 38);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+#clear-all:hover {
+  background-color: rgb(199, 107, 107);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#clear-all:active {
+  border: 1px solid darkcyan;
+  background-color: rgb(199, 187, 187);
 }

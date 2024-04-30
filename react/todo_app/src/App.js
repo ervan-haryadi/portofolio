@@ -55,35 +55,39 @@ function App() {
   }
 
   return (
-    <div id='todo-list'>
-      <h1>Todo List</h1>
-      <form onSubmit={addTodo}>
-        <input type='text' id='addTodo' />
-        <button type='submit'>Add Todo</button>
-      </form>
+    <div id='todo-container'>
+      <div id='todo-list'>
+        <h1>Todo List</h1>
+        <form onSubmit={addTodo}>
+          <input type='text' id='addTodo' />
+          <button type='submit'>Add Todo</button>
+        </form>
 
-      {todos.map((todo) =>
-        <div className='todo' key={todo.id}>
-          <input type='checkbox' id="complete-checkbox" checked={todo.isCompleted} onChange={() => toggleComplete(todo.id)} />
-          <div className='todo-text'>
-            {todo.id === edit ?
-              (<input type='text' id={todo.id} defaultValue={todo.text} />
-              ) :
-              (<div>{todo.text}</div>)
-            }
-          </div>
-          <div className='todo-action'>
-            {todo.id === edit ?
-              (<button onClick={() => editTodo(todo)}>Submit Edit</button>
-              ) :
-              (<button onClick={() => setEdit(todo.id)}>Edit Todo</button>
-              )}
+        {todos.map((todo) =>
+          <div className='todo' key={todo.id}>
+            <div className='todo-text'>
+              {todo.id === edit ?
+                (<input type='text' id={todo.id} defaultValue={todo.text} />
+                ) :
+                (<div>{todo.text}</div>)
+              }
+              <input type='checkbox' id="todo-checkbox" checked={todo.isCompleted} onChange={() => toggleComplete(todo.id)} />
+            </div>
+            <div className='todo-actions'>
+              {todo.id === edit ?
+                (<button onClick={() => editTodo(todo)}>Submit Edit</button>
+                ) :
+                (<button onClick={() => setEdit(todo.id)}>Edit Todo</button>
+                )}
 
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+              <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            </div>
           </div>
-        </div>
-      )}
-      <button onClick={() => deleteAll()}>Delete All Todos</button>
+        )}
+      </div>
+      <div class='todo-clear'>
+          <button id='clear-all' onClick={() => deleteAll()}>Delete All</button>
+      </div>
     </div>
   );
 }
