@@ -54,6 +54,24 @@ function App() {
     setTodos([])
   }
 
+// LOCAL STORAGE USING HOOKS
+// load
+useEffect(() => {
+  const json = localStorage.getItem("todos");
+  const loadTodos = JSON.parse(json);
+  if(loadTodos) {
+    setTodos(loadTodos);
+  }
+}, [])
+
+// save
+useEffect(() => {
+  if(todos.length > 0) {
+    const json = JSON.stringify(todos);
+    localStorage.setItem("todos",json);
+  }
+}, [todos])
+
   return (
     <div id='todo-container'>
       <div id='todo-list'>
